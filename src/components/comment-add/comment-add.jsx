@@ -12,20 +12,26 @@ export default class CommentList extends Component {
         userName:'',
         content:'',
     }
-    // static propTypes = {
-    //     comments:PropTypes.array.isRequired
-    // }
-    handleAdd(){
-
+    static propTypes = {
+        addComments:PropTypes.func.isRequired
     }
-    handleUserOne(e){
+    handleAdd = () =>{
+        const comment = this.state
+        if(!comment.userName && !comment.content) return
+        this.props.addComments(comment)
+        this.setState({
+            userName:'',
+            content:'',
+        })
+    }
+    handleUserOne =(e)=>{
         let {userName} = this.state;
         userName = e.target.value;
         this.setState({
             userName
         })
     }
-    handleUserTwo(e){
+    handleUserTwo =(e) =>{
         let {content} = this.state;
         content = e.target.value;
         this.setState({
@@ -35,8 +41,8 @@ export default class CommentList extends Component {
     render(){
         return (
             <div>
-                <input className="inputBasic" value={this.userName} onchange={this.handleUserOne} placeholder="姓名" type="text"/>
-                <textarea className="texterea"  value={this.content} onchange={this.handleUserTwo} name="" id="" cols="30" rows="10"></textarea>
+                <input className="inputBasic" value={this.state.userName} onChange={this.handleUserOne} placeholder="姓名" type="text"/>
+                <textarea className="texterea"  value={this.state.content} onChange={this.handleUserTwo} name="" id="" cols="30" rows="10"></textarea>
                 <button onClick={this.handleAdd}>add</button>
             </div>
         )

@@ -6,7 +6,11 @@ export default class CommentItem extends Component{
         super(props)
     }
     static propTyps = {
-        //comment:PropTyps.object.isRequired
+        //index:PropTyps.number.isRequired
+    }
+    delect = ()=>{
+        const {index} = this.props
+        this.props.delData(index)
     }
     render(){
         const {comment} = this.props
@@ -15,7 +19,7 @@ export default class CommentItem extends Component{
                 <div className="group">
                     <p>{comment.userName}说：</p>
                     <p>{comment.content}</p>
-                    <button>删除</button>
+                    <button onClick={this.delect}>删除</button>
                 </div>
             </div>
         )
